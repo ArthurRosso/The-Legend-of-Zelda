@@ -1,0 +1,8 @@
+{
+    "files.associations": {
+        "sala.h": "c",
+        "inimigo.h": "c",
+        "coordenadas.h": "c",
+        "jogador.h": "c"
+    }
+}
