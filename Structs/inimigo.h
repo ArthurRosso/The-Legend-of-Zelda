@@ -25,6 +25,7 @@
 
 #define GHINI 0
 #define OKTOROK 1
+#define EMPTY ' '
 
 typedef struct t_ini
 {

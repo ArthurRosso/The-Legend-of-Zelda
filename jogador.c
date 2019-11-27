@@ -5,8 +5,7 @@
 #include <unistd.h>
 #include <time.h>
 
-#include "jogador.h"
-#include "inimigo.h"
+#include "Structs/jogador.h"
 
 void desenha_jogador (JOGADOR *link)
 {

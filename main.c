@@ -6,14 +6,13 @@
 #include <poll.h>    // poll(), struct pollfd e POLLIN
 #include <time.h>
 
-#include "mundo.h"
-#include "sala.h"
-#include "jogador.h"
-#include "inimigo.h"
+#include "Structs/mundo.h"
+#include "Structs/sala.h"
+#include "Structs/jogador.h"
+#include "Structs/inimigo.h"
 
 #define FREQUENCY 1000
 
-bool kbhit();
 void update (MUNDO *world, float deltaTime);
 
 int main()
@@ -28,18 +27,13 @@ int main()
     MUNDO m;
     gera_mundo(&m);
 
-    while (1) {
-      update(&m, FREQUENCY/1000000.0f);
-      usleep(FREQUENCY);
+    while (1)
+    {
+        update(&m, FREQUENCY/100);
+        usleep(FREQUENCY);
     }
 
     endwin();
 
     return 0;
-}
-
-bool kbhit()
-{
-    struct pollfd pollstdin= {STDIN_FILENO, POLLIN, 0};
-    return poll(&pollstdin, 1, 0)==1;
 }

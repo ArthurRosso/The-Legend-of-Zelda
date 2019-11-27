@@ -1,7 +1,7 @@
 #ifndef SALA_H
 #define SALA_H
 
-#define NRO_INIS 10
+#define NRO_INIS 3
 
 #include "inimigo.h"
 
