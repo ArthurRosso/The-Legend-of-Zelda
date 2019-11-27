@@ -6,14 +6,13 @@
 #include <poll.h>    // poll(), struct pollfd e POLLIN
 #include <time.h>
 
-#include "Structs/mundo.h"
 #include "Structs/sala.h"
 #include "Structs/jogador.h"
 #include "Structs/inimigo.h"
 
 #define FREQUENCY 1000
 
-void update (MUNDO *world, float deltaTime);
+void update (SALA *sala, float deltaTime);
 
 int main()
 {
@@ -24,12 +23,12 @@ int main()
     noecho();
     curs_set(0);
 
-    MUNDO m;
-    gera_mundo(&m);
+    SALA s;
+    gera_sala(&s);
 
     while (1)
     {
-        update(&m, FREQUENCY/100);
+        update(&s, FREQUENCY/100);
         usleep(FREQUENCY);
     }
 
