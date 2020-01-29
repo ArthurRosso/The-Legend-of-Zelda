@@ -12,7 +12,7 @@
 
 #define FREQUENCY 1000
 
-void update (SALA *sala, float deltaTime);
+int update (SALA *sala, float deltaTime);
 
 int main()
 {
@@ -22,13 +22,14 @@ int main()
     cbreak();
     noecho();
     curs_set(0);
+    int sair;
 
     SALA s;
-    gera_sala(&s);
+    gera_sala(&s, 1);
 
-    while (1)
+    while (sair != ESC)
     {
-        update(&s, FREQUENCY/100);
+        sair = update(&s, FREQUENCY/1000);
         usleep(FREQUENCY);
     }
 

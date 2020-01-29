@@ -77,3 +77,39 @@ void desenha_inimigo (INIMIGO *ini)
     move(ini->pos.y, ini->pos.x);
     refresh();
 }
+
+void desenha_lapide (INIMIGO *ini)
+{
+    char corn1 = 218 + '\0';
+    char corn2 = 191 + '\0';
+    char corn3 = 192 + '\0';
+    char corn4 = 217 + '\0';
+    char bonus;
+
+    mvaddch(ini->pos.y,   ini->pos.x, EMPTY);
+    mvaddch(ini->pos.y,   ini->pos.x+1, EMPTY);
+    mvaddch(ini->pos.y,   ini->pos.x+2, EMPTY);
+    mvaddch(ini->pos.y,   ini->pos.x+3, EMPTY);
+    mvaddch(ini->pos.y+1, ini->pos.x,   EMPTY);
+    mvaddch(ini->pos.y+1, ini->pos.x+1, EMPTY);
+    mvaddch(ini->pos.y+1, ini->pos.x+1, EMPTY);
+    mvaddch(ini->pos.y+1, ini->pos.x+2, EMPTY);
+    mvaddch(ini->pos.y+1, ini->pos.x+3, EMPTY);
+    mvaddch(ini->pos.y+2, ini->pos.x,   EMPTY);
+    mvaddch(ini->pos.y+2, ini->pos.x+1, EMPTY);
+    mvaddch(ini->pos.y+2, ini->pos.x+1, EMPTY);
+    mvaddch(ini->pos.y+2, ini->pos.x+2, EMPTY);
+    mvaddch(ini->pos.y+2, ini->pos.x+3, EMPTY);
+    mvaddch(ini->pos.y, ini->pos.x, corn1);
+    mvaddch(ini->pos.y, ini->pos.x+1, corn2);
+    mvaddch(ini->pos.y-1, ini->pos.x, corn3);
+    mvaddch(ini->pos.y-1, ini->pos.x+1, corn4);
+    if (ini->item == 1){
+        bonus = '!';
+        mvaddch(ini->pos.y, ini->pos.x+5, bonus);
+    } else if (ini->item == 2) {
+        bonus = '~';
+        mvaddch(ini->pos.y, ini->pos.x+5, bonus);
+    }
+    refresh();
+}

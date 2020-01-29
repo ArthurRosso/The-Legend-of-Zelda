@@ -23,7 +23,11 @@
 typedef struct t_jog
 {
     int vida;
+    int nivel;
     COORDENADAS pos; // posicao
+    int pont; // pontuacao atual
+    int chave; //valor que determina troca de sala
+    //int vel; // A velocidade do jogador cresce a cada mudança de sala.
 } JOGADOR;
 
 void desenha_jogador (JOGADOR *link);

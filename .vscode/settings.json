@@ -3,6 +3,7 @@
         "sala.h": "c",
         "inimigo.h": "c",
         "coordenadas.h": "c",
-        "jogador.h": "c"
+        "jogador.h": "c",
+        "poll.h": "c"
     }
 }

@@ -37,5 +37,6 @@ typedef struct t_ini
 } INIMIGO;
 
 void desenha_inimigo (INIMIGO *ini);
+void desenha_lapide (INIMIGO *ini);
 
 #endif //INIMIGO_H

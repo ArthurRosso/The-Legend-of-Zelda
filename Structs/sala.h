@@ -13,12 +13,13 @@ typedef struct t_sala
     JOGADOR link;
 } SALA;
 
-void gera_sala (SALA *sala);
+void gera_sala (SALA *sala, int numInis);
 
-void move_jogador (SALA *sala);
+void move_jogador (SALA *sala, int ch);
 void ataque_magico (SALA *sala);
 
 void move_inimigo (SALA *sala, INIMIGO *ini);
 void updateInimigo(SALA *sala, INIMIGO *ini, float deltaTime);
+void addPont(SALA *sala, int indice);
 
 #endif

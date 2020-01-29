@@ -10,7 +10,7 @@
 #include "Structs/jogador.h"
 #include "Structs/inimigo.h"
 
-void gera_sala (SALA *sala)
+void gera_sala (SALA *sala, int numInis)
 {
     int i;
     time_t t;
@@ -21,9 +21,17 @@ void gera_sala (SALA *sala)
     sala->link.pos.x = 0;
     sala->link.pos.dir = 1;
 
+    sala->numInis = numInis;
+    sala->link.nivel=numInis;
+
+    if (numInis==1){
+        sala->link.vida=3;
+        sala->link.pont=0;
+    }
+
     desenha_jogador(&sala->link);
 
-    for (i=0; i < NRO_INIS_MAX; i++)
+    for (i=0; i < sala->numInis; i++)
     {
         sala->inis[i].vida=1;
 
@@ -32,15 +40,15 @@ void gera_sala (SALA *sala)
         sala->inis[i].pos.x=rand() % COLS-3;
 
         sala->inis[i].cod = 0;
+        //sala->inis[i].cod=(rand() % 2);
 
         if (i==0)
         {
             sala->inis[i].item=2;
+        } else {
+            sala->inis[i].item=1;
+            //sala->inis[i].item=(rand() % 2);
         }
-        sala->inis[i].item=1;
-
-        //sala->inis[i].item=(rand() % 2);
-        //sala->inis[i].cod=(rand() % 2);
 
         sala->inis[i].timer=0;
 
@@ -48,14 +56,12 @@ void gera_sala (SALA *sala)
     }
 }
 
-void move_jogador (SALA *sala)
+void move_jogador (SALA *sala, int ch)
 {
-    int ch;
 
     desenha_jogador(&sala->link);
     refresh();
 
-    ch = getch();
     switch (ch)
     {
     case KEY_UP:
@@ -70,6 +76,13 @@ void move_jogador (SALA *sala)
         {
             sala->link.pos.x = sala->link.pos.x + 1;
             sala->link.pos.dir=1;
+            if((sala->link.chave==1) && (sala->link.pos.x == COLS - 3)){
+                //TODO: limpar a tela e criar
+                sala->link.chave=0;
+                sala->link.pont+=5;
+                //TODO: percorrer um for limpando os inimigos
+                gera_sala(sala, sala->link.nivel+1);
+            }
         }
         break;
     case KEY_LEFT:
@@ -104,11 +117,12 @@ void ataque_magico (SALA *sala)
         {
             mvaddch(sala->link.pos.y-1-i, sala->link.pos.x+1, P_ATUD);
             refresh();
-            for(j=0; j < NRO_INIS_MAX; j++)
+            for(j=0; j < sala->numInis; j++)
             {
                 if((sala->link.pos.x+1) == (sala->inis[j].pos.x+1))
                 {
                     sala->inis[j].vida=0;
+                    addPont(sala, j);
                 }
             }
         }
@@ -118,11 +132,12 @@ void ataque_magico (SALA *sala)
         {
             mvaddch(sala->link.pos.y+1, sala->link.pos.x+3+i, P_ATRL);
             refresh();
-            for(j=0; j < NRO_INIS_MAX; j++)
+            for(j=0; j < sala->numInis; j++)
             {
                 if( (sala->link.pos.y+1) == (sala->inis[j].pos.y+1) )
                 {
                     sala->inis[j].vida=0;
+                    addPont(sala, j);
                 }
             }
         }
@@ -132,11 +147,12 @@ void ataque_magico (SALA *sala)
         {
             mvaddch(sala->link.pos.y+1, sala->link.pos.x-1-i, P_ATRL);
             refresh();
-            for(j=0; j < NRO_INIS_MAX; j++)
+            for(j=0; j < sala->numInis; j++)
             {
                 if( (sala->link.pos.y+1) == (sala->inis[j].pos.y+1) )
                 {
                     sala->inis[j].vida=0;
+                    addPont(sala, j);
                 }
             }
         }
@@ -146,17 +162,26 @@ void ataque_magico (SALA *sala)
         {
             mvaddch(sala->link.pos.y+3+i, sala->link.pos.x+1, P_ATUD);
             refresh();
-            for(j=0; j < NRO_INIS_MAX; j++)
+            for(j=0; j < sala->numInis; j++)
             {
                 if( (sala->link.pos.x+i) == (sala->inis[j].pos.x+i) )
                 {
                     sala->inis[j].vida=0;
+                    addPont(sala, j);
                 }
             }
         }
         break;
     }
     refresh();
+}
+
+void addPont(SALA *sala, int indice){
+    if (sala->inis[indice].cod == GHINI){
+        sala->link.pont = sala->link.pont + 2;
+    } else if (sala->inis[indice].cod == OKTOROK){
+       sala->link.pont++;
+    }
 }
 
 void updateInimigo(SALA *sala, INIMIGO *ini, float deltaTime)
@@ -173,13 +198,20 @@ void updateInimigo(SALA *sala, INIMIGO *ini, float deltaTime)
 
             move_inimigo(sala, ini);
         }
+    } else {
+        desenha_lapide(ini);
+        if ((sala->link.pos.y == ini->pos.y) && (sala->link.pos.x == ini->pos.x+5)){
+            if(ini->item==1){
+                sala->link.vida++;
+            } else if (ini->item==2){
+                sala->link.chave=1;
+            }
+        }
     }
 }
 
 void move_inimigo (SALA *sala, INIMIGO *ini)
 {
-    //if(ini->vida == 1)
-    //{
         if(sala->link.pos.y != ini->pos.y)
         {
             if ((sala->link.pos.y) > (ini->pos.y))
@@ -204,5 +236,4 @@ void move_inimigo (SALA *sala, INIMIGO *ini)
             }
             desenha_inimigo(ini);
         }
-    //}
 }
