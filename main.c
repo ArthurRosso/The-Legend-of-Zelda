@@ -10,9 +10,10 @@
 #include "Structs/jogador.h"
 #include "Structs/inimigo.h"
 
-#define FREQUENCY 1000
+#define timeIni 1000000
+#define timeLink 100
 
-int update (SALA *sala, float deltaTime);
+int update (SALA *sala, float deltaTimeIni, float deltaTimeLink);
 
 int main()
 {
@@ -29,8 +30,8 @@ int main()
 
     while (sair != ESC)
     {
-        sair = update(&s, FREQUENCY/1000);
-        usleep(FREQUENCY);
+        sair = update(&s, timeIni, timeLink);
+        //usleep(FREQUENCY);
     }
 
     endwin();

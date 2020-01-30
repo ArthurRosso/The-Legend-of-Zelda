@@ -11,23 +11,29 @@
 #include "Structs/inimigo.h"
 
 // Atualiza uma instancia de mundo, se passando deltaTime segundos
-int update (SALA *sala, float deltaTime)
+int update (SALA *sala, float deltaTimeIni, float deltaTimeLink)
 {
-    int i, c;
+    int i, c=5;
     char mesg[]="Pontuacao: %d    Vida: %d    Nivel: %d";
 
     mvprintw(2,(COLS-strlen(mesg))/2,"Pontuacao: %d   Vida: %d   Nivel: %d",sala->link.pont, sala->link.vida, sala->link.nivel);
 
-    c = getch();
-    if (c == ESC){
-        return c;
+    // Aumeta o timer
+    sala->link.timer += deltaTimeLink;
+
+    // cada lance do timer o inimigo pode se mover
+    if (sala->link.timer >= 1)
+    {
+        c = getch();
+        if (c == ESC){
+            return c;
+        }
+        move_jogador(sala, c);
     }
 
     for (i=0; i < sala->numInis; i++)
     {
-        updateInimigo(sala, &sala->inis[i], deltaTime);
+        updateInimigo(sala, &sala->inis[i], deltaTimeIni);
 
     }
-
-    move_jogador(sala, c);
 }

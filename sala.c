@@ -122,7 +122,7 @@ void ataque_magico (SALA *sala)
                 if((sala->link.pos.x+1) == (sala->inis[j].pos.x+1))
                 {
                     sala->inis[j].vida=0;
-                    addPont(sala, j);
+                    //addPont(sala, j);
                 }
             }
         }
@@ -137,7 +137,7 @@ void ataque_magico (SALA *sala)
                 if( (sala->link.pos.y+1) == (sala->inis[j].pos.y+1) )
                 {
                     sala->inis[j].vida=0;
-                    addPont(sala, j);
+                    //addPont(sala, j);
                 }
             }
         }
@@ -152,7 +152,7 @@ void ataque_magico (SALA *sala)
                 if( (sala->link.pos.y+1) == (sala->inis[j].pos.y+1) )
                 {
                     sala->inis[j].vida=0;
-                    addPont(sala, j);
+                    //addPont(sala, j);
                 }
             }
         }
@@ -167,7 +167,7 @@ void ataque_magico (SALA *sala)
                 if( (sala->link.pos.x+i) == (sala->inis[j].pos.x+i) )
                 {
                     sala->inis[j].vida=0;
-                    addPont(sala, j);
+                    //addPont(sala, j);
                 }
             }
         }
