@@ -77,6 +77,7 @@ void desenha_jogador (JOGADOR *link)
         break;
     }
 
+    attron(COLOR_PAIR(4));
     move(link->pos.y, link->pos.x);
     refresh();
 }

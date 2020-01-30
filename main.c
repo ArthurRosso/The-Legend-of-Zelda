@@ -10,10 +10,7 @@
 #include "Structs/jogador.h"
 #include "Structs/inimigo.h"
 
-#define timeIni 1000000
-#define timeLink 100
-
-int update (SALA *sala, float deltaTimeIni, float deltaTimeLink);
+int update (SALA *sala);
 
 int main()
 {
@@ -23,16 +20,19 @@ int main()
     cbreak();
     noecho();
     curs_set(0);
+    start_color();
+
+    init_pair(GRASS_PAIR, COLOR_BLACK, COLOR_GREEN);
+    init_pair(WATER_PAIR, COLOR_CYAN, COLOR_BLUE);
+    init_pair(MOUNTAIN_PAIR, COLOR_BLACK, COLOR_WHITE);
+    init_pair(PLAYER_PAIR, COLOR_BLACK, COLOR_GREEN);
+
     int sair;
 
     SALA s;
     gera_sala(&s, 1);
 
-    while (sair != ESC)
-    {
-        sair = update(&s, timeIni, timeLink);
-        //usleep(FREQUENCY);
-    }
+    sair = update(&s);
 
     endwin();
 

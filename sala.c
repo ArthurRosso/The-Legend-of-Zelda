@@ -12,6 +12,7 @@
 
 void gera_sala (SALA *sala, int numInis)
 {
+    clear();
     int i;
     time_t t;
 
@@ -20,6 +21,7 @@ void gera_sala (SALA *sala, int numInis)
     sala->link.pos.y = LINES-3;
     sala->link.pos.x = 0;
     sala->link.pos.dir = 1;
+    sala->link.timer = 0;
 
     sala->numInis = numInis;
     sala->link.nivel=numInis;
@@ -54,6 +56,7 @@ void gera_sala (SALA *sala, int numInis)
 
         desenha_inimigo(&sala->inis[i]);
     }
+    draw_map();
 }
 
 void move_jogador (SALA *sala, int ch)
@@ -236,4 +239,39 @@ void move_inimigo (SALA *sala, INIMIGO *ini)
             }
             desenha_inimigo(ini);
         }
+}
+
+void draw_map(void)
+{
+    int y, x;
+
+    /* draw the quest map */
+
+    /* background */
+
+    attron(COLOR_PAIR(GRASS_PAIR));
+    for (y = 0; y < LINES; y++) {
+        mvhline(y, 0, GRASS, COLS);
+    }
+    attroff(COLOR_PAIR(GRASS_PAIR));
+
+    /* mountains, and mountain path */
+
+    attron(COLOR_PAIR(MOUNTAIN_PAIR));
+    for (x = COLS / 2; x < COLS * 3 / 4; x++) {
+        mvvline(0, x, MOUNTAIN, LINES);
+    }
+    attroff(COLOR_PAIR(MOUNTAIN_PAIR));
+
+    attron(COLOR_PAIR(GRASS_PAIR));
+    mvhline(LINES / 4, 0, GRASS, COLS);
+    attroff(COLOR_PAIR(GRASS_PAIR));
+
+    /* lake */
+
+    attron(COLOR_PAIR(WATER_PAIR));
+    for (y = 1; y < LINES / 2; y++) {
+        mvhline(y, 1, WATER, COLS / 3);
+    }
+    attroff(COLOR_PAIR(WATER_PAIR));
 }

@@ -27,7 +27,7 @@ typedef struct t_jog
     COORDENADAS pos; // posicao
     int pont; // pontuacao atual
     int chave; //valor que determina troca de sala
-    int timer;
+    float timer;
     //int vel; // A velocidade do jogador cresce a cada mudança de sala.
 } JOGADOR;
 

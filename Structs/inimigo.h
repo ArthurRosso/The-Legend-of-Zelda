@@ -33,7 +33,7 @@ typedef struct t_ini
     COORDENADAS pos;
     int cod; // codigo para diferenciar entre os inimigos
     int item; // 0==nada, 1==1vida, 2==chave
-    int timer;
+    float timer;
 } INIMIGO;
 
 void desenha_inimigo (INIMIGO *ini);
