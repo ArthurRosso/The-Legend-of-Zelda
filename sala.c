@@ -56,7 +56,7 @@ void gera_sala (SALA *sala, int numInis)
 
         desenha_inimigo(&sala->inis[i]);
     }
-    draw_map();
+    //draw_map();
 }
 
 void move_jogador (SALA *sala, int ch)

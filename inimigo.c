@@ -74,7 +74,7 @@ void desenha_inimigo (INIMIGO *ini)
         break;
     }
     
-    attron(COLOR_PAIR(4));
+    //attron(COLOR_PAIR(4));
     move(ini->pos.y, ini->pos.x);
     refresh();
 }

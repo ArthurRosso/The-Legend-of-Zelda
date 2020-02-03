@@ -21,7 +21,7 @@ int update (SALA *sala)
     int i, c=5;
     char mesg[]="Pontuacao: %d    Vida: %d    Nivel: %d";
 
-    while (c != ESC){
+    while ((c != ESC) || (sala->link.vida==0)){
         mvprintw(2,(COLS-strlen(mesg))/2,"Pontuacao: %d   Vida: %d   Nivel: %d",sala->link.pont, sala->link.vida, sala->link.nivel);
 
         for (i=0; i < sala->numInis; i++)
@@ -37,7 +37,8 @@ int update (SALA *sala)
             sala->link.timer = 0;
             c = getch();
             if (c == ESC){
-                return c;
+                // TODO: Salva e retorna 0 pra dizer que o jogador não morreu
+                return 0;
             }
             move_jogador(sala, c);
         } else {
@@ -47,5 +48,12 @@ int update (SALA *sala)
         }
     }
 
-    return 0;
+    // Se o jogador morreu retorne 1
+    if (sala->link.vida==0)
+    {
+        return 1;
+    } else
+    {
+        return 0;
+    }
 }
