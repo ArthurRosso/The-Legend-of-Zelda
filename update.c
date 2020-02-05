@@ -38,6 +38,7 @@ int update (SALA *sala)
             c = getch();
             if (c == ESC){
                 // TODO: Salva e retorna 0 pra dizer que o jogador não morreu
+                salva_sala(sala);
                 return 0;
             }
             move_jogador(sala, c);

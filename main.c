@@ -31,8 +31,8 @@ int main()
     int op=0, sair=0;
     char mesg1[]="WRITTEN AND";
     char mesg2[]="DIRECTED BY";
-    char mesg3[]="ARTHUR";
-    char mesg4[]="ROSSO";
+    char mesg3[]="QUENTIM";
+    char mesg4[]="TARANTINO";
     char mesg5[]="Aperte qualquer tecla para voltar ao menu...";
     SALA s;
 
@@ -42,6 +42,7 @@ int main()
         switch (op)
         {
         case 0:
+            /* Novo jogo */
             gera_sala(&s, 1);
 
             sair = update(&s);
@@ -49,6 +50,9 @@ int main()
             
         case 1:
             /* Carregar jogo */
+            carrega_sala(&s);
+
+            sair = update(&s);
             break;
             
         case 2:
@@ -62,7 +66,7 @@ int main()
             mvprintw(LINES/2,(COLS-strlen(mesg1))/2, mesg1);
             mvprintw(LINES/2+1,(COLS-strlen(mesg2))/2, mesg2);
             mvprintw(LINES/2+2,(COLS-strlen(mesg3))/2, mesg3);
-            mvprintw(LINES/2+3,((COLS-strlen(mesg4))/2 -1), mesg4);
+            mvprintw(LINES/2+3,((COLS-strlen(mesg4))/2), mesg4);
             refresh();
             sleep(5);
             mvprintw(LINES/2+6,(COLS-strlen(mesg5))/2, mesg5);

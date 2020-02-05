@@ -59,6 +59,51 @@ void gera_sala (SALA *sala, int numInis)
     //draw_map();
 }
 
+int salva_sala (SALA *sala)
+{
+    clear();
+    int resultado;
+    FILE *arq;
+
+    arq=fopen(FILE_NAME, "wb");
+
+    if(arq==NULL){
+        resultado= -1;
+    }else{
+        resultado=fwrite(sala, sizeof(SALA), 1, arq);
+    }
+
+    fclose(arq);
+
+    return resultado;
+}
+
+int carrega_sala (SALA *sala)
+{
+    clear();
+    int resultado, i;
+    FILE *arq;
+
+    arq=fopen(FILE_NAME, "rb");
+
+    if(arq==NULL){
+        resultado= -1;
+    }else{
+        resultado=fread(sala, sizeof(SALA), 1, arq);
+    }
+
+    fclose(arq);
+
+    desenha_jogador(&sala->link);
+
+    for (i=0; i < sala->numInis; i++)
+    {
+        desenha_inimigo(&sala->inis[i]);
+    }
+
+    return resultado;
+}
+
 void move_jogador (SALA *sala, int ch)
 {
 

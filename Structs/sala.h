@@ -2,6 +2,7 @@
 #define SALA_H
 
 #define NRO_INIS_MAX 10
+#define FILE_NAME "save.dat"
 
 #define GRASS     ' '
 #define WATER     '~'
@@ -25,6 +26,8 @@ typedef struct t_sala
 } SALA;
 
 void gera_sala (SALA *sala, int numInis);
+int salva_sala (SALA *sala);
+int carrega_sala (SALA *sala);
 
 void move_jogador (SALA *sala, int ch);
 void ataque_magico (SALA *sala);
