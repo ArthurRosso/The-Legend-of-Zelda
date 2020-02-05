@@ -27,16 +27,18 @@
 #define OKTOROK 1
 #define EMPTY ' '
 
+#define timeIni 0.2
+
 typedef struct t_ini
 {
     int vida;
     COORDENADAS pos;
-    int cod; // codigo para diferenciar entre os inimigos
+    int cod;  // codigo para diferenciar entre os inimigos
     int item; // 0==nada, 1==1vida, 2==chave
     float timer;
 } INIMIGO;
 
-void desenha_inimigo (INIMIGO *ini);
-void desenha_lapide (INIMIGO *ini);
+void desenha_inimigo(INIMIGO *ini);
+void desenha_lapide(INIMIGO *ini);
 
 #endif //INIMIGO_H

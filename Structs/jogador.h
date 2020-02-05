@@ -20,17 +20,19 @@
 #define SPACE 32
 #define EMPTY ' '
 
+#define timeLink 0.1
+
 typedef struct t_jog
 {
     int vida;
     int nivel;
     COORDENADAS pos; // posicao
-    int pont; // pontuacao atual
-    int chave; //valor que determina troca de sala
+    int pont;        // pontuacao atual
+    int chave;       //valor que determina troca de sala
     float timer;
     //int vel; // A velocidade do jogador cresce a cada mudança de sala.
 } JOGADOR;
 
-void desenha_jogador (JOGADOR *link);
+void desenha_jogador(JOGADOR *link);
 
 #endif //JOGADOR_H
