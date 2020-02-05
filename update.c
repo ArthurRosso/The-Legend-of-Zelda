@@ -11,14 +11,15 @@
 #include "Structs/inimigo.h"
 
 int deseja_salvar();
+void ganhou(void);
 
 // Atualiza uma instancia de mundo, se passando deltaTime segundos
 int update(SALA *sala)
 {
-    int i, c = 5;
+    int i, c;
     char mesg[] = "Pontuacao: %d    Vida: %d    Nivel: %d";
 
-    while ((c != ESC) || (sala->link.vida == 0))
+    while (sala->link.vida != 0)
     {
         mvprintw(2, (COLS - strlen(mesg)) / 2, "Pontuacao: %d   Vida: %d   Nivel: %d", sala->link.pont, sala->link.vida, sala->link.nivel);
 
@@ -53,16 +54,9 @@ int update(SALA *sala)
             mvprintw(4, (COLS - strlen(mesg)) / 2, "Debugger: %f sala->link.timer", sala->link.timer);
         }
     }
+    ganhou();
 
-    // Se o jogador morreu retorne 1
-    if (sala->link.vida == 0)
-    {
-        return 1;
-    }
-    else
-    {
-        return 0;
-    }
+    return 0;
 }
 
 int deseja_salvar()
@@ -125,4 +119,20 @@ int deseja_salvar()
     clear();
 
     return selecionado;
+}
+
+void ganhou(){
+    char mesg1[] = "Parabens!!!";
+    char mesg2[] = "Voce terminou o jogo";
+    char mesg5[] = "Aperte qualquer tecla para voltar ao menu...";
+
+    clear();
+    //refresh();
+    mvprintw(LINES / 2, (COLS - strlen(mesg1)) / 2, mesg1);
+    mvprintw(LINES / 2 + 1, (COLS - strlen(mesg2)) / 2, mesg2);
+    refresh();
+    sleep(5);
+    mvprintw(LINES / 2 + 6, (COLS - strlen(mesg5)) / 2, mesg5);
+    getch();
+    clear();
 }

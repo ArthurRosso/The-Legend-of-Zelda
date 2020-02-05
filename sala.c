@@ -129,13 +129,15 @@ void move_jogador(SALA *sala, int ch)
         {
             sala->link.pos.x = sala->link.pos.x + 1;
             sala->link.pos.dir = 1;
-            if ((sala->link.chave == 1) && (sala->link.pos.x == COLS - 3))
+            if ((sala->link.chave == 1) && (sala->link.pos.x == COLS - 3) && (sala->link.nivel <= NRO_INIS_MAX))
             {
                 //TODO: limpar a tela e criar
                 sala->link.chave = 0;
                 sala->link.pont += 5;
                 //TODO: percorrer um for limpando os inimigos
                 gera_sala(sala, sala->link.nivel + 1);
+            } else if (sala->link.nivel > NRO_INIS_MAX){
+                sala->link.vida = 0;
             }
         }
         break;

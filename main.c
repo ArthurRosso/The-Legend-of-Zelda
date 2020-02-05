@@ -12,7 +12,7 @@
 
 int update(SALA *sala);
 int menu();
-
+void creditos();
 int main()
 {
     initscr();
@@ -29,11 +29,6 @@ int main()
     //init_pair(PLAYER_PAIR, COLOR_BLACK, COLOR_GREEN);
 
     int op = 0, sair = 0;
-    char mesg1[] = "WRITTEN AND";
-    char mesg2[] = "DIRECTED BY";
-    char mesg3[] = "QUENTIM";
-    char mesg4[] = "TARANTINO";
-    char mesg5[] = "Aperte qualquer tecla para voltar ao menu...";
     SALA s;
 
     do
@@ -62,17 +57,7 @@ int main()
 
         case 3:
             /* Creditos */
-            clear();
-            //refresh();
-            mvprintw(LINES / 2, (COLS - strlen(mesg1)) / 2, mesg1);
-            mvprintw(LINES / 2 + 1, (COLS - strlen(mesg2)) / 2, mesg2);
-            mvprintw(LINES / 2 + 2, (COLS - strlen(mesg3)) / 2, mesg3);
-            mvprintw(LINES / 2 + 3, ((COLS - strlen(mesg4)) / 2), mesg4);
-            refresh();
-            sleep(5);
-            mvprintw(LINES / 2 + 6, (COLS - strlen(mesg5)) / 2, mesg5);
-            getch();
-            clear();
+            creditos();
             break;
 
         case 4:
@@ -156,4 +141,25 @@ int menu()
     refresh();
 
     return selecionado;
+}
+
+void creditos()
+{
+    char mesg1[] = "WRITTEN AND";
+    char mesg2[] = "DIRECTED BY";
+    char mesg3[] = "QUENTIM";
+    char mesg4[] = "TARANTINO";
+    char mesg5[] = "Aperte qualquer tecla para voltar ao menu...";
+
+    clear();
+    //refresh();
+    mvprintw(LINES / 2, (COLS - strlen(mesg1)) / 2, mesg1);
+    mvprintw(LINES / 2 + 1, (COLS - strlen(mesg2)) / 2, mesg2);
+    mvprintw(LINES / 2 + 2, (COLS - strlen(mesg3)) / 2, mesg3);
+    mvprintw(LINES / 2 + 3, ((COLS - strlen(mesg4)) / 2), mesg4);
+    refresh();
+    sleep(5);
+    mvprintw(LINES / 2 + 6, (COLS - strlen(mesg5)) / 2, mesg5);
+    getch();
+    clear();
 }
